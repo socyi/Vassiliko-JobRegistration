@@ -1,0 +1,228 @@
+﻿
+@{
+    ViewBag.Title = "Reports";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+    <div class="col-8">
+
+        <h2 class="title1">Generate Reports</h2>
+
+    </div>
+</div>
+<div class="row">
+    <div class="col-8">
+        <div class="list-group list1" id="list1">
+            <button onclick="getVal(this)" class="list-group-item list-group-item-action list2" id="a" data-toggle="list" href="#list-settings" role="tab" aria-controls="settings" value="1">Next Shutdown Pending Jobs</button>
+            <button onclick="getVal(this)" class="list-group-item list-group-item-action list2" id="b" data-toggle="list" href="#list-settings" role="tab" aria-controls="settings" value="2">Pending Jobs By Category</button>
+            <button onclick="getVal(this)" class="list-group-item list-group-item-action list2" id="e" data-toggle="list" href="#list-settings" role="tab" aria-controls="settings" value="3">Pending Jobs By Employee</button>
+            <select class="form-control dropdown" id="employee" required hidden> </select>
+            <select class="form-control dropdown" id="category" required hidden> </select>
+
+        </div>
+    </div>
+    <div class="col-4">
+        <button id="confirm" type="submit" class="buttonS1">Confirm</button>
+    </div>
+</div>
+
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+<script>
+    var x;
+
+    function getVal(objButton) {
+        x = objButton.value;
+
+    }
+
+    $('.buttonS1').click(function () {
+
+
+        switch (x) {
+            case '1':
+                 window.location.href = '@Url.Action("ShutdownJobs", "Reports")';
+                break;
+             case '2':
+                 window.location.href = '@Url.Action("ByCategory", "Reports")';
+                break;
+            case '3':
+
+                 window.location.href = '@Url.Action("ByEmployee", "Reports")';
+                break;
+
+
+            default:
+                document.getElementById("alert1").removeAttribute("hidden");
+
+        }
+
+    });
+</script>
+<script>
+    $(function () {
+
+
+        AjaxCall('/Reports/GetEmployees', 'POST').done(function (response) {
+            if (response.length > 0) {
+                $('#employee').html('');
+                var options = '';
+
+                options += '<option value ="All Emp">All Employees</option>';
+                for (var i = 0; i < response.length; i++) {
+
+                    options += '<option value="' + response[i] + '">' + response[i] + '</option>';
+
+                }
+                $.ajax({
+                    type: "POST",
+                    url: "/Reports/AtToSession",
+                    data: {
+                        value: "All Emp",
+
+                    },
+                    dataType: "html",
+                    contentType: 'application/x-www-form-urlencoded',
+                    success: function () {
+
+                    },
+                    error: function () {
+                        alert("Error occured!!")
+                    }
+                });
+
+                $('#employee').append(options);
+
+            }
+        }).fail(function (error) {
+            alert(error.StatusText);
+        });
+
+        AjaxCall('/Reports/GetCategory', 'POST').done(function (response) {
+            if (response.length > 0) {
+                $('#category').html('');
+                var options = '';
+
+                options += '<option value ="All Category">All Categories</option>';
+
+                for (var i = 0; i < response.length; i++) {
+
+                    options += '<option value="' + response[i] + '">' + response[i] + '</option>';
+
+                }
+                $.ajax({
+                    type: "POST",
+                    url: "/Reports/AtToSessionCategory",
+                    data: {
+                        value: "All Category",
+
+                    },
+                    dataType: "html",
+                    contentType: 'application/x-www-form-urlencoded',
+                    success: function () {
+
+                    },
+                    error: function () {
+                        alert("Error occured!!")
+                    }
+                });
+
+                $('#category').append(options);
+
+            } 
+        }).fail(function (error) {
+            alert(error.StatusText);
+        });
+
+
+    });
+
+    $(function () {
+        $("#e").click(function (event) {
+            $('#category').attr("hidden", true);
+            if ($('#employee').val() === null) {
+                $('#confirm').attr("hidden", true);
+                alert("No employees for this manager")
+            } else {
+                $('#employee').removeAttr("hidden");
+                $('#confirm').removeAttr("hidden");
+            }
+        });
+    });
+
+    $(function () {
+        $("#a").click(function (event) {
+            $('#category').attr("hidden", true);
+            $('#employee').attr("hidden", true);
+            $('#confirm').removeAttr("hidden");
+        });
+    });
+    $(function () {
+        $("#b").click(function (event) {
+
+            $('#employee').attr("hidden", true);
+            if ($('#category').val() === null) {
+                $('#confirm').attr("hidden", true);
+                alert("No categories for this manager")
+            } else {
+               
+                $('#category').removeAttr("hidden");
+                $('#confirm').removeAttr("hidden");
+            }
+        });
+    });
+
+    $(function () {
+        $('#employee').change(function () {
+
+            $.ajax({
+                type: "POST",
+                url: "/Reports/AtToSession",
+                data: {
+                    value: $(this).val(),
+
+                },
+                dataType: "html",
+                contentType: 'application/x-www-form-urlencoded',
+                success: function () {
+
+                },
+                error: function () {
+                    alert("Error occured!!")
+                }
+            });
+
+        });
+        $('#category').change(function () {
+
+            $.ajax({
+                type: "POST",
+                url: "/Reports/AtToSessionCategory",
+                data: {
+                    value: $(this).val(),
+
+                },
+                dataType: "html",
+                contentType: 'application/x-www-form-urlencoded',
+                success: function () {
+
+                },
+                error: function () {
+                    alert("Error occured!!")
+                }
+            });
+
+        });
+    });
+
+    function AjaxCall(url, data, type) {
+        return $.ajax({
+            url: url,
+            type: type ? type : 'GET',
+            data: data,
+            contentType: 'application/json'
+        });
+    }
+</script>

@@ -1,0 +1,122 @@
+﻿@model JobsRegistration.Models.Job_Register
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_Layout2.cshtml";
+    //int code = ViewBag.Manager_Code;
+
+}
+
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+
+</head>
+<body>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.Serial_No)
+        @Html.HiddenFor(model => model.Manager_Code)
+
+
+
+
+
+        <div class="form-group">
+            <div class="row">
+                @Html.LabelFor(model => model.Job_Description, "Job Description", htmlAttributes: new { @class = "control-label col-md-3" })
+                <div class="col-md-9 ">
+                    @Html.DisplayFor(model => model.Job_Description, new  { htmlAttributes = new { @class = "form-control ib4", @id = "ib3" } })
+                    @Html.ValidationMessageFor(model => model.Job_Description, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="row">
+                @Html.LabelFor(model => model.Dep_Code, "Department", htmlAttributes: new { @class = "control-label col-md-3" })
+                <div class="col-md-3  ib50">
+                    @Html.DisplayFor(model => model.Departments.Dep_Description, new { htmlAttributes = new { @class = "form-control", @id = "ib3"} })
+                    @Html.ValidationMessageFor(model => model.Dep_Code, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="row">
+                @Html.LabelFor(model => model.Job_Date, "Date", htmlAttributes: new { @class = "control-label col-md-3" })
+                <div class="col-md-2 ">
+                    @Html.DisplayFor(model => model.Job_Date, new { htmlAttributes = new { @class = "form-control ib50", @type = "date", @id = "ib5" } })
+                    @Html.ValidationMessageFor(model => model.Job_Date, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="row">
+                @Html.LabelFor(model => model.Job_Remarks, "Remarks", htmlAttributes: new { @class = "control-label col-md-3" })
+                <div class="col-md-9">
+                    @Html.EditorFor(model => model.Job_Remarks, new { htmlAttributes = new { @class = "form-control ib4", @id = "ib7" } })
+                    @Html.ValidationMessageFor(model => model.Job_Remarks, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+
+
+
+        <div class="form-group">
+            <div class="row">
+                @Html.LabelFor(model => model.Job_Status, "Status", htmlAttributes: new { @class = "control-label col-md-3" })
+                <div class="col-md-9">
+                    @Html.DropDownList("Job_Status", null, "-Status-", htmlAttributes: new { @class = "form-control ib50", @id = "ib6" })
+                    @Html.ValidationMessageFor(model => model.Job_Status, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+
+
+
+        <div class="form-group">
+            <div class="row">
+                @Html.LabelFor(model => model.Job_Shutdown, "Next Shutdown Job", htmlAttributes: new { @class = " control-label col-md-3" })
+                <div class="col-md-9">
+                    <div class="form-check">
+
+                        @Html.EditorFor(model => model.Job_Shutdown, new { htmlAttributes = new { @type = "checkbox", @class = " form-check-input", @id = "ib12" } })
+                        @Html.ValidationMessageFor(model => model.Job_Shutdown, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="row">
+                @Html.LabelFor(model => model.Job_Compl_Date, "Completion Date", htmlAttributes: new { @class = "control-label col-md-3" })
+                <div class="col-md-9">
+                    @Html.EditorFor(model => model.Job_Compl_Date, new { htmlAttributes = new { @class = "form-control ib50", @id = "ib13" } })
+                    @Html.ValidationMessageFor(model => model.Job_Compl_Date, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="butt4" />
+            </div>
+        </div>
+
+
+    </div>
+    }
+
+</body>
+</html>

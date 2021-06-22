@@ -1,0 +1,75 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title</title>
+    <link rel="shortcut icon" type="image/x-icon" href="~/images/favicon.ico" />
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <script src="~/Scripts/modernizr-2.8.3.js"></script>
+    <link href="~/Content/Chosen/chosen.min.css" rel="stylesheet" />
+    <link href="~/Content/style3.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/util.css" rel="stylesheet" />
+    <link href="~/Content/main.css" rel="stylesheet" />
+    <link href="~/Content/Site.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+
+
+
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top navb1 border-bottom" style="background:#008c8c">
+
+
+      
+       
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                @Html.ActionLink(" ", "Admin", "Home", new { area = "" }, new { @class = "inactiveLink navbar-brand logo border-right" })
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <li class="nav-item">
+                    @Html.ActionLink("New Job", "Create", "Job_Register", new { area = "" }, new { @class = "nav-link button1 link1" })
+
+                </li>
+                <li class="nav-item">
+                    @Html.ActionLink("Jobs", "Index", "Job_Register", new { area = "" }, new { @class = "nav-link button1 link1" })
+
+                </li>
+                <li class="nav-item">
+                    @Html.ActionLink("Employee Jobs", "UserManagerIndex", "Job_Register", new { area = "" }, new { @class = "nav-link button1 link1" })
+
+                </li>
+                <li class="nav-item">
+                    @Html.ActionLink("Reports", "Index", "Reports", new { area = "" }, new { @class = "nav-link button1 link1" })
+
+                </li>
+
+
+
+            </ul>
+
+        </div>
+
+        <i class="fa fa-sign-out" style="font-size:30px;color:white"></i>
+
+        @Html.ActionLink("Logout", "Login", "Login", new { area = "" }, new { @class = "nav-link logout2 " })
+    </nav>
+
+    <div class="container body-content c1 ">
+        @RenderBody()
+
+
+    </div>
+
+    @RenderSection("scripts", required: false)
+
+    <script src="~/Scripts/jquery-3.4.1.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <script src="~/Scripts/chosen.jquery.min.js"></script>
+
+
+</body>
+</html>

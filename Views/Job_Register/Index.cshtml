@@ -1,0 +1,143 @@
+﻿@model IEnumerable<JobsRegistration.Models.Job_Register>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+    <script src="~/Scripts/jquery-3.4.1.min.js"></script>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+</head>
+<body class="c1 bottom">
+
+    <div>
+        @Html.ActionLink("New Entry", "Create", null, new { @class = "butt1" })
+        @Html.ActionLink("Show Pending Jobs", "IndexPending", null, new { @class = "butt1 bb1" })
+        <label class="label1" for="JobSearch">Search by Serial No:</label>
+        <input type="number" id="JobSearch" name="JobSearch" value="" class="itb1 butt1 list-group link" min="0">
+        <button class = "butt1 bb1 itb2" id="SearchBtn">Search </button>
+    </div>
+
+    <div id="tbl1" class="c1">
+        <table class="table" id="table">
+            <tr>
+
+
+                <th>
+                    @Html.DisplayNameFor(model => model.Serial_No)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Job_Description)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Departments.Dep_Description)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Job_Date)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Job_Status1.Status_Description)
+                </th>
+
+                <th>
+                    @Html.DisplayNameFor(model => model.Job_Remarks)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Job_Category.Cat_Description)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Employees.Emp_Name)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Employees1.Emp_Name)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Job_Assign_Date)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Job_Shutdown)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Job_Compl_Date)
+                </th>
+
+                <th></th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Serial_No)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Job_Description)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Departments.Dep_Description)
+                    </td>
+                    <td>
+                        <pre>@Html.DisplayFor(modelItem => item.Job_Date)</pre>
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Job_Status1.Status_Description)
+                    </td>
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Job_Remarks)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Job_Category.Cat_Description)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Employees.Emp_Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Employees1.Emp_Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Job_Assign_Date)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Job_Shutdown)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Job_Compl_Date)
+                    </td>
+
+
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new { id = item.Serial_No }, new { @class = "butt2" })
+                        @Html.ActionLink("Delete", "Delete", new { id = item.Serial_No }, new { @class = "butt3" })
+                    </td>
+                </tr>
+            }
+
+        </table>
+    </div>
+</body>
+</html>
+
+
+
+<script>
+    $(document).ready(function () {
+        $("#SearchBtn").click(function () {
+            var str = 1;
+            str = $("#JobSearch").val();
+            if ($("#JobSearch").val().length<=0)
+                str = 0;
+            
+            window.location = "@Url.Action("IndexSearch", "Job_Register")" + "/"+ str;
+
+        });
+    });
+</script>

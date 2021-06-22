@@ -1,0 +1,121 @@
+﻿
+@{
+    ViewBag.Title = "ShutdownJobs";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+    <body >
+        <div id="printThis">
+            <img id="image" src="~/images/logo2.png" hidden />
+            <h2 style="margin-left:25%">Next Shutdown Pending Jobs</h2>
+
+            <div id="tbl1"></div>
+        </div>
+    </body>
+    <button id="btnPrint" type="button" class="butt1">Print</button>
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+
+
+
+<script>
+    $(document).ready(function () {
+
+        $(function () {
+      
+                $.ajax({
+                    type: "GET",
+
+                    url: "/Reports/Shutdown",
+                    
+                    dataType: "",
+                    contentType: "application/json;charset=utf-8",
+                    //contentType: 'application/x-www-form-urlencoded',
+                    success: function (a) {
+
+                        if (a.length > 0) {
+
+                            
+                            
+                            $('#tbl1').html('');
+                            //var date = new Date(from),
+                            //    yr = date.getFullYear(),
+
+                            //    month = date.getMonth() < 12 ? date.getMonth() + 1 : 1,
+                            //    day = date.getDate() < 10 ? '0' + date.getDate() : date.getDate(),
+                            //    newDate = day + '/' + month + '/' + yr;
+                            //var date = new Date(to),
+                            //    yr = date.getFullYear(),
+                            //    month = date.getMonth() < 12 ? date.getMonth() + 1 : 1,
+                            //    day = date.getDate() < 10 ? '0' + date.getDate() : date.getDate(),
+                            //    newDate2 = day + '/' + month + '/' + yr;
+
+                            var options = '';
+
+                            options += '<table class="table" id="table" ><tr><th>Date</th><th>Description</th><th>Employee Assigned</th></tr>';
+                            var i = 0;
+                            var j = 0;
+
+
+                            while (j < a.length / 3) {
+                               
+                                options += '<tr>';
+
+                                
+                                options += '<td>';
+                                options += a[i].split(' ')[0];
+                                i++;
+                                options += '</td><td>';
+                                options += a[i];
+                                i++;
+                                options += '</td><td>';
+                                options += a[i];
+                                i++;
+                                options += '</td></tr>';
+                               
+                                j++;
+                               
+                            }
+                            options += '</table>';
+                            $('#tbl1').append(options);
+
+                        } else {
+                            alert("No Shutdown Pending Jobs ")
+                            window.location.href = '/Reports/Index/';
+
+                        }
+                    },
+                    error: function () {
+                        alert("Error occured!!")
+                    }
+                });
+                
+            });
+
+        });
+  
+
+</script>
+<script>
+    document.getElementById("btnPrint").onclick = function () {
+        $("#image").removeAttr("hidden");
+        printElement(document.getElementById("printThis"));
+        $('#image').attr("hidden", true);
+    }
+
+    function printElement(elem) {
+        var domClone = elem.cloneNode(true);
+
+        var $printSection = document.getElementById("printSection");
+
+        if (!$printSection) {
+            var $printSection = document.createElement("div");
+            $printSection.id = "printSection";
+            document.body.appendChild($printSection);
+        }
+
+        $printSection.innerHTML = "";
+        $printSection.appendChild(domClone);
+        window.print();
+    }
+</script>

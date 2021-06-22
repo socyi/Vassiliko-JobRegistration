@@ -1,0 +1,52 @@
+﻿@model JobsRegistration.Models.Users
+@{
+    ViewBag.Title = "Login";
+    Layout = "~/Views/_LayoutPage1.cshtml";
+}
+
+<div class="w3ls-main">
+    <div class="wthree-container">
+        <img src="~/images/logo.png" style="width: 450px; height: 100%" />
+    </div>
+    <br />
+    <div class="wthree-container">
+        <div class="wthree-form">
+
+            <div class="wthree-container">
+                <h1 id="login">Login Form</h1>
+            </div>
+            @using (Html.BeginForm("Login", "Login", new { returnUrl = Request.QueryString["ReturnUrl"], FormMethod.Post }))
+            {
+                @Html.AntiForgeryToken()
+
+                <div class="form-horizontal">
+
+                    @Html.ValidationSummary(true, "", new { @class = "custom-validation-summary" })
+                    <div class="w3-user">
+                        <span><i class="fa fa-user-o" aria-hidden="true"></i></span>
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.User_Name, new { htmlAttributes = new { @placeholder = "Username" } })
+                            @Html.ValidationMessageFor(model => model.User_Name)
+                        </div>
+                    </div>
+                    <div class="clear"></div>
+
+                    <div class="w3-psw">
+                        <span><i class="fa fa-key" aria-hidden="true"></i></span>
+                        @Html.EditorFor(model => model.User_Password, new { htmlAttributes = new { @placeholder = "Password", @type = "password" } })
+                        @Html.ValidationMessageFor(model => model.User_Password)
+                    </div>
+
+
+
+                    <div class="w3l-submit">
+                        <input type="submit" value="login">
+                    </div>
+                    <div class="clear"></div>
+                </div>
+            }
+
+
+        </div>
+    </div>
+</div>

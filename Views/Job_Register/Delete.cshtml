@@ -1,0 +1,173 @@
+﻿@model JobsRegistration.Models.Job_Register
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Delete</title>
+</head>
+
+<body>
+  
+    <div class="container-contact100-form-btn">
+
+        <div>
+
+            <dl class="dl-horizontal">
+                <dt class="dt2">
+                    @Html.DisplayNameFor(model => model.Job_Description)
+                </dt>
+
+                <dd class="dd2">
+                    @Html.DisplayFor(model => model.Job_Description)
+                </dd>
+                <br />
+                <br />
+
+                <dt class="dt2">
+                    @Html.DisplayNameFor(model => model.Job_Date)
+                </dt>
+
+                <dd class="dd2">
+                    @Html.DisplayFor(model => model.Job_Date)
+                </dd>
+                <br />
+                <br />
+
+                <dt class="dt2">
+                    @Html.DisplayNameFor(model => model.Job_Compl_Date)
+                </dt>
+
+                <dd class="dd2">
+                    @Html.DisplayFor(model => model.Job_Compl_Date)
+                </dd>
+                <br />
+                <br />
+                <dt class="dt2">
+                    @Html.DisplayNameFor(model => model.Job_Remarks)
+                </dt>
+
+                <dd class="dd2">
+                    @Html.DisplayFor(model => model.Job_Remarks)
+                </dd>
+                <br />
+                <br />
+
+                <dt class="dt2">
+                    @Html.DisplayNameFor(model => model.Job_Shutdown)
+                </dt>
+
+                <dd class="dd2">
+                    @Html.DisplayFor(model => model.Job_Shutdown)
+                </dd>
+                <br />
+                <br />
+
+                <dt class="dt2">
+                    @Html.DisplayNameFor(model => model.Job_Assign_Date)
+                </dt>
+
+                <dd class="dd2">
+                    @Html.DisplayFor(model => model.Job_Assign_Date)
+                </dd>
+                <br />
+                <br />
+                <dt class="dt2">
+                    @Html.DisplayNameFor(model => model.Job_Deadline)
+                </dt>
+
+                <dd class="dd2">
+                    @Html.DisplayFor(model => model.Job_Deadline)
+                </dd>
+                <br />
+                <br />
+                <dt class="dt2">
+                    @Html.DisplayNameFor(model => model.Job_Email)
+                </dt>
+
+                <dd class="dd2">
+                    @Html.DisplayFor(model => model.Job_Email)
+                </dd>
+                <br />
+                <br />
+                <dt class="dt2">
+                    @Html.DisplayNameFor(model => model.Job_Reminder_Date)
+                </dt>
+
+                <dd class="dd2">
+                    @Html.DisplayFor(model => model.Job_Reminder_Date)
+                </dd>
+
+                <br />
+                <br />
+
+                <dt class="dt2">
+                    @Html.DisplayNameFor(model => model.Departments.Dep_Description)
+                </dt>
+
+                <dd class="dd2">
+                    @Html.DisplayFor(model => model.Departments.Dep_Description)
+                </dd>
+                <br />
+                <br />
+                <dt class="dt2">
+                    @Html.DisplayNameFor(model => model.Employees.Emp_Name)
+                </dt>
+
+                <dd class="dd2">
+                    @Html.DisplayFor(model => model.Employees.Emp_Name)
+                </dd>
+                <br />
+                <br />
+                <dt class="dt2">
+                    @Html.DisplayNameFor(model => model.Employees1.Emp_Name)
+                </dt>
+
+                <dd class="dd2">
+                    @Html.DisplayFor(model => model.Employees1.Emp_Name)
+                </dd>
+                <br />
+                <br />
+                <dt class="dt2">
+                    @Html.DisplayNameFor(model => model.Job_Category.Cat_Description)
+                </dt>
+
+                <dd class="dd2">
+                    @Html.DisplayFor(model => model.Job_Category.Cat_Description)
+                </dd>
+                <br />
+                <br />
+                <dt class="dt2">
+                    @Html.DisplayNameFor(model => model.Job_Status1.Status_Description)
+                </dt>
+
+                <dd class="dd2">
+                    @Html.DisplayFor(model => model.Job_Status1.Status_Description)
+                </dd>
+                <br />
+                <br />
+            </dl>
+
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+
+                <div class="form-actions no-color">
+                    <input type="submit" value="Delete" class="butt1" />
+
+                </div>
+                <br />
+            }
+        </div>
+    </div>
+    
+
+</body>
+</html>

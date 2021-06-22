@@ -1,0 +1,120 @@
+﻿
+@{
+    ViewBag.Title = "By Employee";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+    <body >
+        <div id="printThis">
+            <img id="image" src="~/images/logo2.png" hidden />
+            <h2 style="margin-left:25%">Pending Jobs By Employee</h2>
+
+            <div id="tbl1"></div>
+        </div>
+        <button id="btnPrint" type="button" class="butt1">Print</button>
+
+    </body>
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+
+
+
+<script>
+    $(document).ready(function () {
+        
+        $(function () {
+            
+                $.ajax({
+                    type: "GET",
+
+                    url: "/Reports/Employee",
+
+                    dataType: "",
+                    contentType: "application/json;charset=utf-8",
+                    //contentType: 'application/x-www-form-urlencoded',
+                    success: function (a) {
+                        
+                        if (a.length > 0) {
+
+
+
+                            $('#tbl1').html('');
+
+
+                            var options = '';
+                            options += '<h2>' + a[0] + '</h2>';
+                            var x = a[0];
+                            options += '<table class="table" id="table" ><tr><th>Date</th><th>Description</th><th>Remarks</th><th>Next Shutdown</th></tr>';
+                            var i = 0;
+                            var j = 0;
+
+
+                            while (j < a.length / 5) {
+                                if (a[i] != x) {
+                                    options += '</table>'
+                                    options += '<h2>' + a[i] + '</h2>'
+                                    options += '<table class="table" id="table" ><tr><th>Date</th><th>Description</th><th>Remarks</th><th>Next Shutdown</th></tr>';
+                                    x = a[i];
+                                }
+                                options += '<tr>';
+                                i++;
+                                options += '<td>';
+                                options += a[i].split(' ')[0];
+                                i++;
+                                options += '</td><td>';
+                                options += a[i];
+                                i++;
+                                options += '</td><td>';
+                                options += a[i];
+                                i++;
+                                options += '</td><td>';
+                                options += a[i];
+                                i++;
+                                
+                                options += '</td></tr>';
+
+                                j++;
+
+                            }
+                            options += '</table>';
+                            $('#tbl1').append(options);
+
+                        } else {
+                            alert("No jobs for this employee")
+                            window.location.href = '@Url.Action("Index", "Reports")';
+                        }
+                    },
+                    error: function () {
+                        alert("Error occured!!")
+                    }
+                });
+
+            });
+
+        });
+
+
+</script>
+<script>
+    document.getElementById("btnPrint").onclick = function () {
+        $("#image").removeAttr("hidden");
+        printElement(document.getElementById("printThis"));
+        $('#image').attr("hidden", true);
+    }
+
+    function printElement(elem) {
+        var domClone = elem.cloneNode(true);
+
+        var $printSection = document.getElementById("printSection");
+
+        if (!$printSection) {
+            var $printSection = document.createElement("div");
+            $printSection.id = "printSection";
+            document.body.appendChild($printSection);
+        }
+
+        $printSection.innerHTML = "";
+        $printSection.appendChild(domClone);
+        window.print();
+    }
+</script>

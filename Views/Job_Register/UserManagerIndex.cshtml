@@ -1,0 +1,90 @@
+﻿@model IEnumerable<JobsRegistration.Models.Job_Register>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
+
+    <table class="table">
+        <tr>
+
+
+            <th>
+                @Html.DisplayNameFor(model => model.Serial_No)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Job_Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Departments.Dep_Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Job_Date)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Job_Status1.Status_Description)
+            </th>
+
+            <th>
+                @Html.DisplayNameFor(model => model.Job_Remarks)
+            </th>
+
+            <th>
+                @Html.DisplayNameFor(model => model.Job_Shutdown)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Job_Compl_Date)
+            </th>
+
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Serial_No)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Job_Description)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Departments.Dep_Description)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Job_Date)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Job_Status1.Status_Description)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.Job_Remarks)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.Job_Shutdown)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Job_Compl_Date)
+                </td>
+
+                <td>
+                    @Html.ActionLink("Update", "UserEdit", new { id = item.Serial_No }, new { @class = "butt2" })
+                </td>
+            </tr>
+        }
+
+    </table>
+</body>
+</html>

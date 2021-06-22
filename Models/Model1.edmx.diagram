@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="ea3ad6d4594443e38a84a9b6b0068a5b" Name="Diagram1">
+        <EntityTypeShape EntityType="dep_Job_RegisterModel.Departments" Width="1.5" PointX="0.75" PointY="6.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="dep_Job_RegisterModel.Employees" Width="1.5" PointX="0.75" PointY="2.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="dep_Job_RegisterModel.Job_Category" Width="1.5" PointX="0.75" PointY="8.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="dep_Job_RegisterModel.Job_Register" Width="1.5" PointX="3" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="dep_Job_RegisterModel.Job_Status" Width="1.5" PointX="0.75" PointY="11.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="dep_Job_RegisterModel.sysdiagrams" Width="1.5" PointX="5.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="dep_Job_RegisterModel.Users" Width="1.5" PointX="5.75" PointY="3.75" IsExpanded="true" />
+        <AssociationConnector Association="dep_Job_RegisterModel.FK_Job_Register_Departments" ManuallyRouted="false" />
+        <AssociationConnector Association="dep_Job_RegisterModel.FK_Job_Register_Employees" ManuallyRouted="false" />
+        <AssociationConnector Association="dep_Job_RegisterModel.FK_Job_Register_Employees1" ManuallyRouted="false" />
+        <AssociationConnector Association="dep_Job_RegisterModel.FK_Job_Register_Job_Category" ManuallyRouted="false" />
+        <AssociationConnector Association="dep_Job_RegisterModel.FK_Job_Register_Job_Status" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
